@@ -161,10 +161,8 @@ class Board {
     }
 
     // make sure the loop reads the array in order from start to end
-    if (inbetweenSquares[0][0] == endLetter) {
-      if (inbetweenSquares[0][1] == endNum) {
-        inbetweenSquares = inbetweenSquares.reverse();
-      }
+    if (inbetweenSquares[0][0] == endLetter && inbetweenSquares[0][1] == endNum) {
+      inbetweenSquares = inbetweenSquares.reverse();
     }
 
     for (let item of inbetweenSquares) {
