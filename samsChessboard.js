@@ -274,13 +274,21 @@ class Bishop extends Piece {
       return [];
     }
 
-    let bishopMoveArray = [start, end].sort();
-    let minLetter = Board.LETTERS.indexOf(bishopMoveArray[0][0]);
-    let minNum = bishopMoveArray[0][1];
+    let bishopMoveArraySorted = [start, end].sort();
+    let minLetter = Board.LETTERS.indexOf(bishopMoveArraySorted[0][0]);
+    let minNum = bishopMoveArraySorted[0][1];
+
+    //  TODO: combine two if's into one 
+    let minSquare = bishopMoveArraySorted[0];
+    let maxSquare = bishopMoveArraySorted[1];
+
+    console.log(minSquare, maxSquare);
+
+
 
     // adds letter and num incrementally upward
-    if (bishopMoveArray[0][1] < bishopMoveArray[1][1]) {
-      collectSquares.push(bishopMoveArray[0]);
+    if (bishopMoveArraySorted[0][1] < bishopMoveArraySorted[1][1]) {
+      collectSquares.push(bishopMoveArraySorted[0]);
       for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
         collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
       }
@@ -288,7 +296,7 @@ class Bishop extends Piece {
 
     // adds letter upward, and num reduces
     else {
-      collectSquares.push(bishopMoveArray[0]);
+      collectSquares.push(bishopMoveArraySorted[0]);
       for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
         collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
       }
