@@ -243,7 +243,6 @@ class Pawn extends Piece {
 
 /**
  * @class Bishop
- * @todo - finish the class
  */
 class Bishop extends Piece {
   /**
@@ -267,6 +266,7 @@ class Bishop extends Piece {
       horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
       collectSquares = [],
       verticalMovementSquaresCount = Math.abs(start[1] - end[1]);
+    console.log(start, end, "the move");
 
     // check for legal diagonal move: squares moved vertical and horizontal will be the same
     if (verticalMovementSquaresCount != horizonalMovementSquaresCount) {
@@ -276,48 +276,65 @@ class Bishop extends Piece {
 
     let bishopMoveArraySorted = [start, end].sort();
     let minLetter = Board.LETTERS.indexOf(bishopMoveArraySorted[0][0]);
-    let minNum = bishopMoveArraySorted[0][1];
+    console.log(minLetter, "minLetter");
+    let minNum = Math.min(bishopMoveArraySorted[0][1], bishopMoveArraySorted[1][1]);
+    console.log(minNum, "minNum");
 
     //  TODO: combine two if's into one 
     let minSquare = bishopMoveArraySorted[0];
     let maxSquare = bishopMoveArraySorted[1];
+    // let minLetter = ;
+    // let maxLetter = ;
+    // let minNum = ;
+    let letterArray = [minLetter];
+    let numArray = [minNum];
 
-    console.log(minSquare, maxSquare);
-
-
-
-    // adds letter and num incrementally upward
-    if (bishopMoveArraySorted[0][1] < bishopMoveArraySorted[1][1]) {
-      collectSquares.push(bishopMoveArraySorted[0]);
-      for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
-        collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
-      }
+    for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+      collectSquares.push([minLetter + i, minNum + i]);
     }
 
-    // adds letter upward, and num reduces
-    else {
-      collectSquares.push(bishopMoveArraySorted[0]);
-      for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
-        collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
-      }
-    }
+    // if (numArray[0] != start[0]) {
+    //   numArray.reverse();
 
-    // reverse array if it begins with the end square
-    if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
-      collectSquares.reverse();
-    }
+    // }
 
-    // skips the start square
-    collectSquares.shift()    
+    return console.log(collectSquares, "collectSquares");
 
-    return collectSquares;
+    // console.log(minSquare, maxSquare);
+
   }
+
+//     // adds letter and num incrementally upward
+//     if (bishopMoveArraySorted[0][1] < bishopMoveArraySorted[1][1]) {
+//       collectSquares.push(bishopMoveArraySorted[0]);
+//       for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+//         collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
+//       }
+//     }
+
+//     // adds letter upward, and num reduces
+//     else {
+//       collectSquares.push(bishopMoveArraySorted[0]);
+//       for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+//         collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
+//       }
+//     }
+
+//     // reverse array if it begins with the end square
+//     if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
+//       collectSquares.reverse();
+//     }
+
+//     // skips the start square
+//     collectSquares.shift()    
+
+//     return collectSquares;
+//   }
 }
 
 
 /**
  * @class Rook
- * @todo - finish the class
  */
 class Rook extends Piece {
   /**
